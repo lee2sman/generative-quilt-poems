@@ -1,24 +1,17 @@
+#!/usr/bin/env lua
+
+local BW=true
+local debugger=false
 local color = require "color"
 local open = io.open
+require "quilts"
 
 local data_files={}
 local words={}
 local file
 
---[[
-housetop
-
-77777777
-76666668
-76555518
-76544418
-76542318
-76543318
-76111118
-78888888
-]]
-
 local pieces={}
+local pat
 local max_piece_width=0
 
 local function init_random()
@@ -82,47 +75,51 @@ local function shuffle_colors(tab)
 		tab[i], tab[j] = tab[j], tab[i]
 	end
 end
-quilt=
-{
-  {7,7,7,7,7,7,7,7},
-  {7,6,6,6,6,6,6,8},
-  {7,6,5,5,5,5,1,8},
-  {7,6,5,4,4,4,1,8},
-  {7,6,5,4,2,3,1,8},
-  {7,6,5,4,3,3,1,8},
-  {7,6,1,1,1,1,1,8},
-  {7,8,8,8,8,8,8,8},
-}
-local function housetop()
+
+local function select_pattern()
+  return math.random(#quilt)
+end
+
+local function make_quilt()
   print()
-  print(firstToUpper(pieces[1]).." "..firstToUpper(pieces[2]).." quilt, housetop variation")
+  print(firstToUpper(pieces[1]).." "..firstToUpper(pieces[2]).." "..quilt_types[pat].." quilt")
   print()
   for y=1,8 do
     local line=""
     for x=1,8 do
-      --local word=pieces[x]
-      local word=pieces[quilt[y][x]]
+      local word=pieces[quilt[pat][y][x]]
       local spaces=""
       for i=#word,max_piece_width do
 	 spaces=spaces.." "
       end
-      line=line..color_scheme_fg[quilt[y][x]]..color_scheme_bg[quilt[y][x]]..word..spaces
+      if BW then
+	line=line..word..spaces
+      else
+	line=line..color_scheme_fg[quilt[pat][y][x]]..color_scheme_bg[quilt[pat][y][x]]..word..spaces
+      end
     end
-    print(color.reset..line) 
+    if BW then
+      print(line) 
+    else
+      print(color.reset..line) 
+    end
   end
 end
 --------------- MAIN ------------------
 --TEST
+init_random()
+
 get_files()
 file = pick_datafile()
-
+pat=select_pattern()
 create_wordlist()
 
-init_random()
 create_pieces()
---debug()
+if debugger then
+  debug()
+end
 
 shuffle_colors(color_scheme_fg)
 shuffle_colors(color_scheme_bg)
-housetop()
+make_quilt()
 
