@@ -1,8 +1,8 @@
 #!/usr/bin/env lua
 
-local total_quilts=10
-local BW=false
-local debugger=false
+local total_quilts=3
+local BW=true
+local debugger=true
 local color = require "color"
 local open = io.open
 require "quilts"
@@ -47,6 +47,7 @@ local function create_wordlist()
 end
 
 local function create_pieces()
+  max_piece_width=0
   for i=1,8 do
     --get pieces
     pieces[i]=words[math.floor(math.random(#words))]
@@ -63,6 +64,8 @@ function firstToUpper(str)
 end
 
 function debug()
+  print()
+  print()
   print("Data source: "..file)
   print("Pieces:")
   for i,piece in ipairs(pieces) do
@@ -82,9 +85,28 @@ local function select_pattern()
   return math.random(#quilt)
 end
 
+local function split(phrase)
+  chunks = {}
+  for substring in phrase:gmatch("%S+") do
+     table.insert(chunks, substring)
+  end
+  return chunks
+end
+
+local function capitalize_title(t)
+  local capped=""
+  for _,word in ipairs(t) do
+    capped=capped..firstToUpper(word).." "
+  end
+  return capped
+end
+
 local function make_quilt()
   print()
-  print(firstToUpper(pieces[1]).." "..firstToUpper(pieces[2]).." "..quilt_types[pat].." quilt")
+  --print(firstToUpper(pieces[1]).." "..firstToUpper(pieces[2]).." "..quilt_types[pat].." quilt")
+  local title = pieces[1].." "..pieces[2].." "..quilt_types[pat].." quilt"
+  local titleTable = split(title)
+  print(capitalize_title(titleTable))
   print()
   for y=1,8 do
     local line=""
@@ -92,6 +114,7 @@ local function make_quilt()
       local word=pieces[quilt[pat][y][x]]
       local spaces=""
       local total_spaces=0
+
       for i=#word,max_piece_width do
 	 total_spaces=total_spaces+1
 	 --spaces=spaces.." "
@@ -128,16 +151,16 @@ get_files()
 
 --for every quilt
 for j=1,total_quilts do
-  file = pick_datafile()
-  pat=select_pattern()
-create_wordlist()
+    file = pick_datafile()
+    pat=select_pattern()
+    create_wordlist()
 
-create_pieces()
-if debugger then
-  debug()
-end
+    create_pieces()
+    if debugger then
+      debug()
+    end
 
-shuffle_colors(color_scheme_fg)
-shuffle_colors(color_scheme_bg)
-make_quilt()
+    shuffle_colors(color_scheme_fg)
+    shuffle_colors(color_scheme_bg)
+    make_quilt()
 end
