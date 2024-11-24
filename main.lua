@@ -1,6 +1,7 @@
 #!/usr/bin/env lua
 
-local BW=true
+local total_quilts=10
+local BW=false
 local debugger=false
 local color = require "color"
 local open = io.open
@@ -13,6 +14,9 @@ local file
 local pieces={}
 local pat
 local max_piece_width=0
+
+local color_scheme_fg={color.fg.black, color.fg.red, color.fg.green, color.fg.yellow, color.fg.blue, color.fg.pink, color.fg.cyan, color.fg.white}
+local color_scheme_bg={color.bg.black, color.bg.red, color.bg.green, color.bg.yellow, color.bg.blue, color.bg.pink, color.bg.cyan, color.bg.white}
 
 local function init_random()
   math.randomseed(os.time())
@@ -66,8 +70,6 @@ function debug()
   end
   print("Block width: "..max_piece_width)
 end
-local color_scheme_fg={color.fg.black, color.fg.red, color.fg.green, color.fg.yellow, color.fg.blue, color.fg.pink, color.fg.cyan, color.fg.white}
-local color_scheme_bg={color.bg.black, color.bg.red, color.bg.green, color.bg.yellow, color.bg.blue, color.bg.pink, color.bg.cyan, color.bg.white}
 
 local function shuffle_colors(tab)
 	for i = #tab, 2, -1 do
@@ -89,13 +91,27 @@ local function make_quilt()
     for x=1,8 do
       local word=pieces[quilt[pat][y][x]]
       local spaces=""
+      local total_spaces=0
       for i=#word,max_piece_width do
-	 spaces=spaces.." "
+	 total_spaces=total_spaces+1
+	 --spaces=spaces.." "
+      end
+      local total_before=math.floor(total_spaces/2)
+      local total_after=total_spaces-total_before
+      local before_spaces=""
+      for i=1,total_before do
+	before_spaces=before_spaces.." "
+      end
+      local after_spaces=""
+      for i=1,total_after do
+	after_spaces=after_spaces.." "
       end
       if BW then
-	line=line..word..spaces
+	--line=line..word..spaces
+	line=line..before_spaces..word..after_spaces
       else
-	line=line..color_scheme_fg[quilt[pat][y][x]]..color_scheme_bg[quilt[pat][y][x]]..word..spaces
+	--line=line..color_scheme_fg[quilt[pat][y][x]]..color_scheme_bg[quilt[pat][y][x]]..word..spaces
+	line=line..color_scheme_fg[quilt[pat][y][x]]..color_scheme_bg[quilt[pat][y][x]]..before_spaces..word..after_spaces
       end
     end
     if BW then
@@ -106,12 +122,14 @@ local function make_quilt()
   end
 end
 --------------- MAIN ------------------
---TEST
+--init - only once
 init_random()
-
 get_files()
-file = pick_datafile()
-pat=select_pattern()
+
+--for every quilt
+for j=1,total_quilts do
+  file = pick_datafile()
+  pat=select_pattern()
 create_wordlist()
 
 create_pieces()
@@ -122,4 +140,4 @@ end
 shuffle_colors(color_scheme_fg)
 shuffle_colors(color_scheme_bg)
 make_quilt()
-
+end
