@@ -1,8 +1,8 @@
 #!/usr/bin/env lua
 
-local total_quilts=3
+local total_quilts=700
 local BW=true
-local debugger=true
+local debugger=false
 local color = require "color"
 local open = io.open
 require "quilts"
@@ -103,7 +103,6 @@ end
 
 local function make_quilt()
   print()
-  --print(firstToUpper(pieces[1]).." "..firstToUpper(pieces[2]).." "..quilt_types[pat].." quilt")
   local title = pieces[1].." "..pieces[2].." "..quilt_types[pat].." quilt"
   local titleTable = split(title)
   print(capitalize_title(titleTable))
@@ -117,7 +116,6 @@ local function make_quilt()
 
       for i=#word,max_piece_width do
 	 total_spaces=total_spaces+1
-	 --spaces=spaces.." "
       end
       local total_before=math.floor(total_spaces/2)
       local total_after=total_spaces-total_before
@@ -130,10 +128,8 @@ local function make_quilt()
 	after_spaces=after_spaces.." "
       end
       if BW then
-	--line=line..word..spaces
 	line=line..before_spaces..word..after_spaces
       else
-	--line=line..color_scheme_fg[quilt[pat][y][x]]..color_scheme_bg[quilt[pat][y][x]]..word..spaces
 	line=line..color_scheme_fg[quilt[pat][y][x]]..color_scheme_bg[quilt[pat][y][x]]..before_spaces..word..after_spaces
       end
     end
