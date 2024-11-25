@@ -1,20 +1,3 @@
----
-header-includes: |
-    <style>
-    @page {
-	margin: 1cm;
-	size: Letter;
-    }
-    html {
-    }
-    body {
-	margin: 0;
-        font-family: monospace;
-	font-size: 10pt;
-    }
-    </style>
-...
-
 Monumental Resolve log cabin quilt
 
   monumental     resolve     obsequiously shooting star   monumental     resolve     obsequiously shooting star 
