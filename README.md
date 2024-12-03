@@ -6,7 +6,7 @@ Quilt Poems feature visual poems in the layout of various quilt patterns (log ca
 
 Quilt layouts are in the quilt.lua file.
 
-CC BY
+The book and other text output content is CC BY 4.0 Deed. The code is unlicensed / public domain.
 
 [Example text output](https://github.com/lee2sman/generative-quilt-poems/blob/main/dev/bw-quilts-output-test3.txt)
 
