@@ -1,12 +1,14 @@
-# Quilt poems
-
-Generated on occasion of NaNoGenMo 2024
+# Quilt Poems
 
 Quilt Poems feature visual poems in the layout of various quilt patterns (log cabin, crazy quilt, etc) for placement of the words in pattern.
 
 Quilt layouts are in the quilt.lua file.
 
-CC BY
+The book and other text output content is CC BY 4.0 Deed. The code is unlicensed / public domain.
+
+Created on occasion of NaNoGenMo 2024. I have continued to work on this project including an updated algorithm that minimizes each of the 8 column widths separately, and a separate [quilt photo grids](https://tildegit.org/exquisitecorp/quilt-photo-grids) project.
+
+## NanoGenMo period
 
 [Example text output](https://github.com/lee2sman/generative-quilt-poems/blob/main/dev/bw-quilts-output-test3.txt)
 
@@ -14,7 +16,55 @@ CC BY
 
 [Devlog](https://github.com/NaNoGenMo/2024/issues/22)
 
-## Examples
+## Examples of latest algorithm
+
+```
+Invite Detail Bullseye Quilt 
+
+speedily  invite   invite   detail   detail   invite   invite    fast   
+ invite  speedily  invite   detail   detail   invite    fast    invite  
+ invite   invite  speedily  detail   detail    fast    invite   invite  
+  bomb     bomb     bomb   speedily   fast     bomb     bomb     bomb   
+  bomb     bomb     bomb     fast   speedily   bomb     bomb     bomb   
+ invite   invite    fast    detail   detail  speedily  invite   invite  
+ invite    fast    invite   detail   detail   invite  speedily  invite  
+  fast    invite   invite   detail   detail   invite   invite  speedily 
+
+Educate Dramatic Amish Bars Quilt 
+
+educate  educate  educate  educate  educate  educate  educate educate 
+educate dramatic approach dramatic approach dramatic approach educate 
+educate dramatic approach dramatic approach dramatic approach educate 
+educate dramatic approach dramatic approach dramatic approach educate 
+educate dramatic approach dramatic approach dramatic approach educate 
+educate dramatic approach dramatic approach dramatic approach educate 
+educate dramatic approach dramatic approach dramatic approach educate 
+educate  educate  educate  educate  educate  educate  educate educate 
+
+Ear Operate Log Cabin Variation Quilt 
+
+ear   operate  ear unreliable ear   operate  ear unreliable 
+ear     ear    ear     ear    ear     ear    ear     ear    
+ear unreliable ear   operate  ear unreliable ear   operate  
+ear     ear    ear     ear    ear     ear    ear     ear    
+ear   operate  ear unreliable ear   operate  ear unreliable 
+ear     ear    ear     ear    ear     ear    ear     ear    
+ear unreliable ear   operate  ear unreliable ear   operate  
+ear     ear    ear     ear    ear     ear    ear     ear    
+
+Far Scold Little Coins Quilt 
+
+far         far        far  far   far  far   far far 
+far        scold       far  far   far bread  far far 
+far         far        far  far   far  far   far far 
+far         far        far trail  far  far   far far 
+far         far        far  far   far  far   far far 
+far anatomical theatre far  far   far  far  nose far 
+far         far        far  far  ruin  far   far far 
+far         far        far  far   far  far   far far 
+```
+
+## Original NaNoGenMo output
 
 ```
 Orange Idiot Bullseye Quilt 

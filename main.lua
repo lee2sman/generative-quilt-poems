@@ -13,7 +13,6 @@ local file
 
 local pieces={}
 local pat
-local max_piece_width=0
 
 local color_scheme_fg={color.fg.black, color.fg.red, color.fg.green, color.fg.yellow, color.fg.blue, color.fg.pink, color.fg.cyan, color.fg.white}
 local color_scheme_bg={color.bg.black, color.bg.red, color.bg.green, color.bg.yellow, color.bg.blue, color.bg.pink, color.bg.cyan, color.bg.white}
@@ -47,16 +46,20 @@ local function create_wordlist()
 end
 
 local function create_pieces()
-  max_piece_width=0
   for i=1,8 do
     --get pieces
     pieces[i]=words[math.floor(math.random(#words))]
-
-    --get block width
-    if #pieces[i]>max_piece_width then
-      max_piece_width=#pieces[i]
-    end
   end
+
+  max_column_width={0,0,0,0,0,0,0,0}
+  for y=1,8 do
+      for x=1,8 do
+	local word=pieces[quilt[pat][y][x]]
+	if #word>max_column_width[x] then
+	  max_column_width[x]=#word
+	end
+      end
+   end
 end
 
 function firstToUpper(str)
@@ -71,7 +74,6 @@ function debug()
   for i,piece in ipairs(pieces) do
     print(i..": "..piece)
   end
-  print("Block width: "..max_piece_width)
 end
 
 local function shuffle_colors(tab)
@@ -114,7 +116,7 @@ local function make_quilt()
       local spaces=""
       local total_spaces=0
 
-      for i=#word,max_piece_width do
+      for i=#word,max_column_width[x] do
 	 total_spaces=total_spaces+1
       end
       local total_before=math.floor(total_spaces/2)
