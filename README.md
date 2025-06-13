@@ -6,7 +6,7 @@ Quilt layouts are in the quilt.lua file.
 
 The book and other text output content is CC BY 4.0 Deed. The code is unlicensed / public domain.
 
-Created on occasion of NaNoGenMo 2024. I have continued to work on this project including an updated algorithm that minimizes each of the 8 column widths separately, and a separate [quilt photo grids](https://tildegit.org/exquisitecorp/quilt-photo-grids) project.
+Created on occasion of NaNoGenMo 2024. I have continued to work on this project including an updated algorithm that minimizes each of the 8 column widths separately, and a separate [quilt photo grids](https://tildegit.org/exquisitecorp/quilt-photo-grids) project, a [daily quilt poems site](https://leetusman.com/everyday/293/) and a zine chapbook. A separate [repo](https://github.com/lee2sman/quilt-pattern-data) also tracks the latest quilt pattern data.
 
 ## NanoGenMo period
 
